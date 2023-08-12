@@ -38,7 +38,7 @@ const __dirname = getCurrentDirectory(import.meta.url);
 app.use(express.static(path.join(__dirname, "/public/build")));
 app.use(express.json());
 app.use(fileUpload({ useTempFiles: true }));
-app.use(cookieParser(process.env.JWT_SECREt));
+app.use(cookieParser(process.env.JWT_SECRET));
 
 app.use("/api/v1/courses", CourseRouter);
 app.use("/api/v1/main-carousel", MainCarouselRouter);
