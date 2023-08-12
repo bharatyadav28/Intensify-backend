@@ -29,8 +29,16 @@ const register = async (req, res) => {
   });
 
   //  There a proxy between client and server
-  const clientProtocol = req.get("x-forwarded-proto");
-  const clientHost = req.get("x-forwarded-host");
+  let clientProtocol = req.get("x-forwarded-proto");
+  let clientHost = req.get("x-forwarded-host");
+
+  if (clientProtocol === "http") {
+    clientHost = "localhost:3000";
+  }
+  if (clientProtocol === "https") {
+    clientHost = "intensify-jet.vercel.app";
+  }
+
   const origin = `${clientProtocol}://${clientHost}`;
 
   console.log("hp", clientProtocol, clientHost, req.get("host"));
