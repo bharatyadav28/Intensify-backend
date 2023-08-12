@@ -29,8 +29,8 @@ const register = async (req, res) => {
   });
 
   //  There a proxy between client and server
-  const clientProtocol = req.get("x-forwarded-proto") || req.protocol;
-  const clientHost = req.get("x-forwarded-host") || req.get("host");
+  const clientProtocol = req.get("x-forwarded-proto");
+  const clientHost = req.get("x-forwarded-host");
   const origin = `${clientProtocol}://${clientHost}`;
 
   await sendVerificationEmail({ name, email, origin, verificationToken });
