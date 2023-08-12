@@ -33,7 +33,7 @@ const register = async (req, res) => {
   const clientHost = req.get("x-forwarded-host");
   const origin = `${clientProtocol}://${clientHost}`;
 
-  console.log("hp", clientProtocol, clientHost);
+  console.log("hp", clientProtocol, clientHost, req.get("host"));
 
   await sendVerificationEmail({ name, email, origin, verificationToken });
 

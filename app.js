@@ -56,7 +56,7 @@ cloudinary.config({
 
 try {
   await dbConnect(process.env.MONGO_URL);
-  console.log("Connected to database successfully.");
+  // console.log("Connected to database successfully.");
   const PORT = process.env.PORT || 4000;
   app.listen(PORT, console.log(`Server started at http://localhost:${PORT}`));
 } catch (error) {
