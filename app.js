@@ -21,7 +21,7 @@ import errorHandlerMiddleware from "./middlewares/errorHandler.js";
 import { getCurrentDirectory } from "./utils/index.js";
 
 const app = express();
-app.set("trust proxy", true);
+app.set("trust proxy", 1);
 
 app.use(
   rateLimiter({
