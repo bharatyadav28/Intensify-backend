@@ -44,9 +44,6 @@ app.use("/api/v1/courses", CourseRouter);
 app.use("/api/v1/main-carousel", MainCarouselRouter);
 app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/users", UserRouter);
-app.use("*", (req, res) =>
-  res.sendFile(path.resolve(__dirname, "public", "build", "index.html"))
-);
 
 app.use(pageNotFoundMiddleware);
 app.use(errorHandlerMiddleware);
