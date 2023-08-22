@@ -3,6 +3,7 @@ import crypto from "crypto";
 
 import UserModel from "../models/User.js";
 import TokenModel from "../models/Token.js";
+import CartModel from "../models/Cart.js";
 import { BadRequestError, UnauthenticatedError } from "../errors/index.js";
 import {
   attachCookiesToResponse,
@@ -41,7 +42,7 @@ const register = async (req, res) => {
 
   const origin = `${clientProtocol}://${clientHost}`;
 
-  console.log("hp", clientProtocol, clientHost, req.get("host"));
+  // console.log("hp", clientProtocol, clientHost, req.get("host"));
 
   await sendVerificationEmail({ name, email, origin, verificationToken });
 
@@ -71,6 +72,15 @@ const verifyEmail = async (req, res) => {
   user.verified = new Date(Date.now());
 
   user.save();
+
+  // creating empty cart
+  await CartModel.create({
+    tax: 0,
+    subTotal: 0,
+    total: 0,
+    cartItems: [],
+    user: user._id,
+  });
 
   // setTimeout(() => {
   //   return res

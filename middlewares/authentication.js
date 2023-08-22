@@ -17,6 +17,7 @@ const authentication = async (req, res, next) => {
   try {
     if (accessToken) {
       const payload = verify_token(accessToken);
+
       req.user = payload.user;
       return next();
     }

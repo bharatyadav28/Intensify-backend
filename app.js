@@ -11,14 +11,18 @@ import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 
 import dbConnect from "./db/connect.js";
+import { getMyLearning } from "./controllers/mylearningControllers.js";
 import CourseRouter from "./routes/course/courseRoutes.js";
 import MainCarouselRouter from "./routes/mainCarouselRoutes.js";
 import AuthRouter from "./routes/authRoutes.js";
 import UserRouter from "./routes/userRoutes.js";
+import CartRouter from "./routes/cartRoutes.js";
+import OrderRouter from "./routes/orderRoutes.js";
 
 import pageNotFoundMiddleware from "./middlewares/pageNotFound.js";
 import errorHandlerMiddleware from "./middlewares/errorHandler.js";
 import { getCurrentDirectory } from "./utils/index.js";
+import authentication from "./middlewares/authentication.js";
 
 const app = express();
 app.set("trust proxy", 1);
@@ -44,6 +48,10 @@ app.use("/api/v1/courses", CourseRouter);
 app.use("/api/v1/main-carousel", MainCarouselRouter);
 app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/users", UserRouter);
+app.use("/api/v1/carts", CartRouter);
+app.use("/api/v1/orders", OrderRouter);
+
+app.get("/api/v1/mylearning", authentication, getMyLearning);
 
 app.use(pageNotFoundMiddleware);
 app.use(errorHandlerMiddleware);
