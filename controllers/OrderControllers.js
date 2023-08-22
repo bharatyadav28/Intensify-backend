@@ -3,7 +3,7 @@ import Stripe from "stripe";
 
 import CartModel from "../models/Cart.js";
 import OrderModel from "../models/Order.js";
-import { BadRequest } from "../../../ecommerce/backend/errors/index.js";
+import { BadRequestError } from "../errors/index.js";
 import { checkPermissions } from "../utils/index.js";
 
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
@@ -32,7 +32,7 @@ const createOrder = async (req, res) => {
   const cart = await CartModel.findOne({ _id: cartId });
 
   if (!cart) {
-    throw new BadRequest("Cart doesnot exist");
+    throw new BadRequestError("Cart doesnot exist");
   }
 
   if (cart.cartItems.length === 0) {
