@@ -6,12 +6,11 @@ import CourseModel from "../models/course/Course.js";
 const getMyLearning = async (req, res) => {
   const userId = req.user.userId;
 
-  const orders = await OrderModel.find({ user: userId });
+  const orders = await OrderModel.find({ user: userId, status: "paid" });
 
   const coursesIds = [];
   orders.forEach((order) => {
     let cartItems = order.cartItems;
-
     cartItems.forEach((cartItem) => {
       coursesIds.push(cartItem.course);
     });
