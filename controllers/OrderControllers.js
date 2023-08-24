@@ -58,7 +58,7 @@ const createOrder = async (req, res) => {
     cartItems,
     user,
     cartId,
-    clientSecret: (await paymentIntent).client_secret,
+    clientSecret: paymentIntent.client_secret,
   });
 
   res
