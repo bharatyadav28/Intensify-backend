@@ -20,7 +20,7 @@ const getMyLearning = async (req, res) => {
 
   for (let id of coursesIds) {
     const course = await CourseModel.findOne({ _id: id }).select(
-      "_id image name netPrice actualPrice"
+      "_id image name netPrice actualPrice tutor"
     );
 
     purchasedCourses.push(course);

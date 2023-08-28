@@ -63,6 +63,9 @@ const CourseSchema = mongoose.Schema(
     relatedName: {
       type: String,
     },
+    tutor: {
+      name: String,
+    },
   },
   {
     timestamps: true,

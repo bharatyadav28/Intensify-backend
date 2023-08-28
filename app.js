@@ -18,6 +18,7 @@ import AuthRouter from "./routes/authRoutes.js";
 import UserRouter from "./routes/userRoutes.js";
 import CartRouter from "./routes/cartRoutes.js";
 import OrderRouter from "./routes/orderRoutes.js";
+import VideoRouter from "./routes/videoRoutes.js";
 
 import pageNotFoundMiddleware from "./middlewares/pageNotFound.js";
 import errorHandlerMiddleware from "./middlewares/errorHandler.js";
@@ -50,6 +51,7 @@ app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/users", UserRouter);
 app.use("/api/v1/carts", CartRouter);
 app.use("/api/v1/orders", OrderRouter);
+app.use("/api/v1/videos", VideoRouter);
 
 app.get("/api/v1/mylearning", authentication, getMyLearning);
 
