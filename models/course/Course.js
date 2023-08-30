@@ -66,6 +66,14 @@ const CourseSchema = mongoose.Schema(
     tutor: {
       name: String,
     },
+    noOfReviews: {
+      type: Number,
+      default: 0,
+    },
+    averageRatings: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
