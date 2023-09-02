@@ -30,7 +30,9 @@ const createReview = async (req, res) => {
   req.body.user = userId;
   const review = await ReviewModel.create(req.body);
 
-  return res.status(StatusCodes.CREATED).json({ review });
+  return res
+    .status(StatusCodes.CREATED)
+    .json({ msg: "Review submitted successfully" });
 };
 
 const getSingleReview = async (req, res) => {
@@ -69,10 +71,34 @@ const getTopReviews = async (req, res) => {
     .json({ reviews: reviewDetails, count: reviews.length });
 };
 
+const hasAlreadySubmitted = async (req, res) => {
+  const userId = req.user.userId;
+  const courses = await CourseModel.find().select("_id");
+  const courseIds = [];
+
+  courses.forEach((course) => courseIds.push(course._id));
+
+  let submitFlag = false;
+
+  for (let id of courseIds) {
+    const alreadySubmitted = await ReviewModel.findOne({
+      course: id,
+      user: userId,
+    });
+    if (alreadySubmitted) {
+      submitFlag = true;
+      break;
+    }
+  }
+
+  return res.status(StatusCodes.OK).json({ courseIds, submitFlag });
+};
+
 export {
   getAllReviews,
   createReview,
   getSingleReview,
   getSingleCoursetReviews,
   getTopReviews,
+  hasAlreadySubmitted,
 };

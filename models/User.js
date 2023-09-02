@@ -58,6 +58,12 @@ const UserSchema = mongoose.Schema({
   verified: {
     type: Date,
   },
+  passwordToken: {
+    type: String,
+  },
+  passwordTokenExpirationDate: {
+    type: Date,
+  },
 });
 
 // Pre save hook

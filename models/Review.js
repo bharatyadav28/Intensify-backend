@@ -41,7 +41,6 @@ ReviewSchema.statics.aggregateResult = async function (courseId) {
       },
     },
   ]);
-  console.log("result:", result);
 
   const course = await CourseModel.findOne({ _id: courseId });
   course.averageRatings = Math.ceil(result[0].averageRatings || 0);

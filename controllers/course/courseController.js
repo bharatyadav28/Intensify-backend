@@ -13,11 +13,24 @@ import {
 } from "../../utils/generalEntries.js";
 
 const getAllCourses = async (req, res) => {
-  const { search, sort } = req.query;
+  const { search, sort, rating, tutors } = req.query;
 
   const queryObject = {};
   if (search) {
     queryObject.name = { $regex: search, $options: "i" };
+  }
+
+  if (rating) {
+    queryObject.averageRatings = { $gte: rating };
+  }
+
+  if (tutors) {
+    const tutorsArr = tutors.split(",");
+    const temp = [];
+    for (let tutor of tutorsArr) {
+      temp.push({ tutor });
+    }
+    queryObject.$or = temp;
   }
 
   let result = CourseModel.find(queryObject);
